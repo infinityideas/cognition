@@ -30,7 +30,6 @@ export default function Home() {
         setImageLink(imageLink+1);
         setTimes([...times, (new Date()).getTime() - currentTime])
         currentTime = (new Date()).getTime();
-        setTimeout(() => {setInterstitial(false)}, 3000)
       }
     }
   })
