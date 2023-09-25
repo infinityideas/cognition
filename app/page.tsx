@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Home() {
   const [imageLink, setImageLink] = useState(0);
@@ -13,7 +13,21 @@ export default function Home() {
 
   let currentTime = (new Date()).getTime();
 
-  document.addEventListener("keypress", (event: KeyboardEvent) => {
+  const handleSpace = () => {
+    console.log(imageLink)
+    if (imageLink == 2) {
+      setEnd(true);
+      setTimes([...times, (new Date()).getTime() - currentTime])
+    } else {
+      setInterstitial(true);
+      setShow(false);
+      setImageLink(imageLink+1);
+      setTimes([...times, (new Date()).getTime() - currentTime])
+      currentTime = (new Date()).getTime();
+    }
+  }
+
+  const handleEvent = (event: KeyboardEvent) => {
     if (event.code == 'KeyA') {
       setShow(false);
       setInterstitial(false);
@@ -21,18 +35,15 @@ export default function Home() {
     }
 
     if (event.code == 'Space') {
-      if (imageLink == 2) {
-        setEnd(true);
-        setTimes([...times, (new Date()).getTime() - currentTime])
-      } else {
-        setInterstitial(true);
-        setShow(false);
-        setImageLink(imageLink+1);
-        setTimes([...times, (new Date()).getTime() - currentTime])
-        currentTime = (new Date()).getTime();
-      }
+      handleSpace();
     }
+  }
+
+  useEffect(() => {
+    removeEventListener("keypress", handleEvent)
+    addEventListener("keypress", handleEvent)
   })
+  
 
   if (end) {
     return (
