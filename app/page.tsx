@@ -52,7 +52,7 @@ export default function Home() {
 
   if (interstitial) {
     return (
-      <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontSize: "2em", width: "100vw", height: "100vh"}}><h1>Press "a" to move to the next image</h1></div>
+      <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontSize: "2em", width: "100vw", height: "100vh"}}><h1>Press &quot;a&quot; to move to the next image</h1></div>
     )
   }
 
